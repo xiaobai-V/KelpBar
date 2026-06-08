@@ -1,5 +1,5 @@
 # 1. 指定最低支持的 CMake 版本
-cmake_minimum_required(VERSION 3.1.5)
+cmake_minimum_required(VERSION 3.10)
 # 2. 定义项目名称 + 编程语言（C语言）
 project(hello C)
 # 3. 自动查找当前目录下所有 C 源文件，存入变量 SRCS
