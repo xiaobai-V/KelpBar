@@ -1,0 +1,80 @@
+---
+# KelpBar — Linux 内核代码风格
+# 核心：函数 { 换行，其余 { 不换行；switch/case 对齐；单行 body 不加花括号
+
+Language: Cpp
+BasedOnStyle: LLVM
+
+# ====================== 大括号规则：Linux 内核风格 ======================
+# Linux：函数 { 换行，if/for/while/struct/enum { 不换行
+BreakBeforeBraces: Linux
+BraceWrapping:
+  BeforeElse: true
+  BeforeCatch: true
+  BeforeWhile: true
+  SplitEmptyFunction: false
+  SplitEmptyRecord: false
+
+# 单语句 if/for/while 不加花括号
+RemoveBracesLLVM: true
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
+AllowShortBlocksOnASingleLine: Never
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortEnumsOnASingleLine: false
+
+# ====================== 缩进 ======================
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+# switch/case 对齐（case 不额外缩进，与 switch 同级）
+IndentCaseLabels: false
+IndentPPDirectives: AfterHash
+
+# ====================== 行宽 ======================
+ColumnLimit: 120
+
+# ====================== 空格控制 ======================
+SpaceBeforeAssignmentOperators: true
+SpacesBeforeTrailingComments: 1
+# 指针 * 靠变量名（Linux 风格：char *p）
+PointerAlignment: Right
+
+# ====================== 换行、拆分长语句 ======================
+AlignAfterOpenBracket: Align
+BinPackArguments: false
+BinPackParameters: false
+BreakBeforeBinaryOperators: None
+BreakBeforeTernaryOperators: true
+AllowAllArgumentsOnNextLine: false
+AllowAllParametersOfDeclarationOnNextLine: false
+
+# ====================== 对齐 ======================
+AlignConsecutiveMacros: true
+AlignConsecutiveAssignments: true
+AlignConsecutiveDeclarations: true
+AlignEscapedNewlines: Right
+AlignTrailingComments: true
+
+# ====================== 头文件排序 ======================
+IncludeBlocks: Regroup
+SortIncludes: true
+IncludeIsMainRegex: "(test|main|app|drv)_.*$"
+IncludeCategories:
+  # 系统标准头文件 <stdio.h> <fcntl.h>
+  - Regex: '^<.*\.h>'
+    Priority: 1
+  # 项目内部头文件 "xxx.h"
+  - Regex: '"[a-zA-Z0-9_].*"'
+    Priority: 2
+
+# ====================== 其他 ======================
+ReflowComments: true
+MaxEmptyLinesToKeep: 1
+InsertNewlineAtEOF: true
+KeepEmptyLinesAtTheStartOfBlocks: false
+CompactNamespaces: false
+NamespaceMacros: []
+MacroBlockBegin: "^#define.*do\\s*\\{"
+MacroBlockEnd: "^\\s*while\\(0\\)\\s*;"
