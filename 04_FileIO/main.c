@@ -1,7 +1,7 @@
-#include <stdio.h>  // 包含标准输入输出函数
-#include <fcntl.h>  // 包含 open() 函数的声明
-#include <unistd.h> // 包含 close() 函数的声明
+#include <fcntl.h> // 包含 open() 函数的声明
+#include <stdio.h> // 包含标准输入输出函数
 #include <string.h>
+#include <unistd.h> // 包含 close() 函数的声明
 
 // 头文件：
 // #include <unistd.h>
@@ -26,24 +26,22 @@
 
 int main()
 {
-    int fd;
+    int     fd;
     ssize_t bytes_written;
     ssize_t bytes_read;
-    char write_buf[] = "Hello, World!\n";
-    char read_buf[1024];
+    char    write_buf[] = "Hello, World!\n";
+    char    read_buf[1024];
     // 打开文件（如果不存在则创建，设置读写权限）
     fd = open("example.txt", O_RDWR | O_CREAT, 0644);
 
-    if (fd == -1)
-    {
+    if (fd == -1) {
         printf("打开文件失败");
         return 1;
     }
 
     // 使用文件描述符进行读写操作...
     bytes_written = write(fd, write_buf, strlen(write_buf));
-    if (bytes_written == -1)
-    {
+    if (bytes_written == -1) {
         printf("写入文件失败");
         close(fd);
         return 1;
@@ -82,8 +80,7 @@ int main()
     }
 
     bytes_read = read(fd, read_buf, sizeof(read_buf));
-    if (bytes_read == -1)
-    {
+    if (bytes_read == -1) {
         printf("读取文件失败");
         close(fd);
         return 1;

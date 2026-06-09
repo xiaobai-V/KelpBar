@@ -1,13 +1,12 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <string.h>
-#include <sys/types.h> // mkfifo
-#include <sys/stat.h>  // mkfifo
-#include <fcntl.h>
-#include <sys/stat.h>
-#include <fcntl.h>
 #include <errno.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include <string.h>
+#include <sys/stat.h> // mkfifo
+#include <sys/stat.h>
+#include <sys/types.h> // mkfifo
+#include <sys/wait.h>
+#include <unistd.h>
 
 #define MY_FIFO_PATH "/tmp/my_fifo"
 
@@ -30,8 +29,7 @@
 int main()
 {
     // 写入端也可以容忍读取端未启动的情况，尝试创建 fifo（如果已存在则忽略）
-    if (mkfifo(MY_FIFO_PATH, 0666) == -1 && errno != EEXIST)
-    {
+    if (mkfifo(MY_FIFO_PATH, 0666) == -1 && errno != EEXIST) {
         perror("mkfifo");
         return 1;
     }
@@ -40,20 +38,17 @@ int main()
     const char *msg = "hello world";
     // 阻塞等待读取端打开
     int fd = open(MY_FIFO_PATH, O_WRONLY);
-    if (fd == -1)
-    {
+    if (fd == -1) {
         perror("open");
         return 1;
     }
 
     size_t count = 0;
-    while (1)
-    {
+    while (1) {
         printf("write data %zu: %s\n", count++, msg);
         // 每隔1s写入fifo
         ssize_t ret = write(fd, msg, strlen(msg));
-        if (ret == -1)
-        {
+        if (ret == -1) {
             perror("write");
             break;
         }

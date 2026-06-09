@@ -1,5 +1,6 @@
-#include "utils.h"
 #include <stdio.h>
+
+#include "utils.h"
 
 void print_message()
 {

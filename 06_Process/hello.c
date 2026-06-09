@@ -1,9 +1,8 @@
-#include <unistd.h>
 #include <stdio.h>
+#include <unistd.h>
 int main()
 {
-    while (1)
-    {
+    while (1) {
         printf("hello \n");
         usleep(5000 * 1000);
     }
